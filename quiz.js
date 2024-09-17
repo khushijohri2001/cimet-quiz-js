@@ -1,43 +1,57 @@
-import {questionList} from "./utils/questionList.js";
+import { questionList } from "./utils/questionList.js";
 
 const question = document.querySelector(".question");
 const options = document.querySelector(".options");
 const nextButton = document.querySelector(".next-btn");
 
 let currentQuestion = 0;
+let score = 0;
 
-const nextQuestion = () => {
-    if(currentQuestion <= questionList.length){
-        
-        currentQuestion++;
-        startQuiz()
+const nextQuestionDetail = () => {
+  if (currentQuestion < questionList.length - 1) {
+    questionList[currentQuestion].options.forEach(() => deleteOption());
+
+    currentQuestion++;
+    startQuiz();
+    if(nextButton.innerText === "Submit"){
+
     }
-}
+    
+  }
+};
+
+
+
+const createOption = (optionText) => {
+  const createElement = document.createElement("button");
+  const createTextNode = document.createTextNode(optionText);
+
+  createElement.appendChild(createTextNode);
+  createElement.classList.add("option");
+
+  options.appendChild(createElement);
+};
+
+
+
+const deleteOption = () => {
+  document.querySelector(".option").remove();
+};
+
+
 
 const startQuiz = () => {
-    question.innerText = questionList[currentQuestion].question;
-    questionList[currentQuestion].options.forEach((option) => {
-        const createOption = document.createElement("button");
-        const optionText = document.createTextNode(option)
+  question.innerText = questionList[currentQuestion].question;
+  questionList[currentQuestion].options.forEach((option) => {
+    createOption(option);
+  });
 
-        createOption.appendChild(optionText);
-
-        options.appendChild(createOption)
-    });
-}
-
+  if (currentQuestion === questionList.length - 1) {
+    nextButton.innerText = "Submit";
+  }
+};
 
 startQuiz();
 
-nextButton.addEventListener("click", nextQuestion)
-console.log(currentQuestion);
 
-
-
-// for(let i = 0; i < questionList.length; i++){
-    
-// }
-
-
-
-
+nextButton.addEventListener("click", nextQuestionDetail);
