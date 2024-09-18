@@ -11,3 +11,7 @@
 .incorrect-option{
     background-color: red;
 }
+
+.display-hide{
+    display: none   ;
+}
