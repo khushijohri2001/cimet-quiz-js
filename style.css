@@ -3,3 +3,11 @@
     align-items: center;
     gap: 10px;
 }
+
+.correct-option{
+    background-color: green;
+}
+
+.incorrect-option{
+    background-color: red;
+}
